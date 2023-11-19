@@ -4,10 +4,12 @@ import flet as ft
 # defining the main function
 def main(page:ft.Page):
     # setting the page title
-    page.title = "Hello World!"
+    page.title = "Kelompok1.chatbot.ai"
     
+
+
     # text control
-    text= ft.Text(value='My first app with flutter', color="blue")
+    text= ft.Text(value='Testing Home', color="blue")
     page.controls.append(text)
     page.update()
 # starting the app
