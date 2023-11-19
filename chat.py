@@ -5,6 +5,8 @@ import flet as ft
 def main(page:ft.Page):
     # setting the page title
     page.title = "Hello World!"
+
+    print("ini revan tes")
     
     # text control
     text= ft.Text(value='My first app with flutter', color="blue")
