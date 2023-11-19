@@ -6,7 +6,7 @@ def main(page:ft.Page):
     # setting the page title
     page.title = "Kelompok1.chatbot.ai"
     
-
+    print("Halo Dunia")
 
     # text control
     text= ft.Text(value='Testing Home', color="blue")
