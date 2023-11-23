@@ -1,6 +1,17 @@
 # # import the library
 import flet as ft
 
+
+
+
+    def gpt_output(self, prompt):
+        response = openai.ChatCompletion.create(
+            model = "gpt-3.5-turbo",
+            messages = [{"role": "user","content": prompt }]
+        )
+        response = response['choice'][0]['message']['content'].strip()
+        self.animate_text_output(name="Agora",prompt=response)
+
 # defining the main function
 def main(page:ft.Page):
     # setting the page title
