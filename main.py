@@ -344,6 +344,34 @@ def tab2_content():
 def tab3_content():
     return ft.Text("This is Tab 3 Content", size=18, weight="w800")
 
+
+def main(page:ft.page):
+    page.window_width = 420
+    page.theme_mode = "light"
+
+    t = ft.Tabs(
+        selected_index=0,
+        animation_duration=300,
+        tabs=[
+            ft.Tab(
+                text="Sign-In",
+                icon=ft.icon.LOGIN,
+                content=tab1_content(),
+            ),
+            ft.Tab(
+                text="ChatBot",
+                icon=ft.icon.CHAT,
+                content=tab2_content(),
+            ),
+            ft.Tab(
+                text="Settings",
+                icon=ft.icon.SETTINGS,
+                content=tab3_content(),
+            ),
+        ]
+        expand=1,
+    )
+
 # defining the main function
 def main(page:ft.Page):
     # setting the page title
