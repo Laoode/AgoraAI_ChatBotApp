@@ -97,7 +97,14 @@ class Prompt(ft.TextField):
         page.title = "Kelompok1.chatbot.ai"
         
     # Mas Dimas your code put here
-    
+    def gpt_output(self, prompt):
+        response = openai.ChatCompletion.create(
+            model = "gpt-3.5-turbo",
+            messages = [{"role": "user","content": prompt }]
+        )
+        response = response['choice'][0]['message']['content'].strip()
+        self.animate_text_output(name="Agora",prompt=response)
+        
     # method : run all methods when started
     def run_prompt(self, event):
         #set the value of the user prompt
@@ -394,9 +401,5 @@ def main(page:ft.page):
 if __name__ == "__main__":
     ft.app(target=main)
     
-# defining the main function
-def main(page:ft.Page):
-    # setting the page title
-    page.title = "Kelompok1.chatbot.ai"
 
     
