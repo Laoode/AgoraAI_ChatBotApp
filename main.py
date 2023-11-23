@@ -76,6 +76,21 @@ class Prompt(ft.TextField):
         self.chat: ft.ListView =chat
     # output display is working - but let's add animation to text output...
 
+# Mashaf start
+def animate_text_output(self, name:str, prompt:str):
+    word_list: list =[]
+    msg= CreateMessage(name,"")
+    self.chat.controls.append(msg)
+        
+    for word in list(prompt):
+        word_list.append(word)
+        msg.text.value="".join(word_list)
+        self.chat.update()
+        time.sleep(0.008)
+    
+def user_output(self,prompt):
+        self.animate_text_output(name="Me", prompt=prompt)
+# Mashaf end       
 # defining the main function
 def main(page:ft.Page):
     # setting the page title
