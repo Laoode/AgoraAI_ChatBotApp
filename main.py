@@ -7,7 +7,6 @@ import threading
 import openai
 
 
-
 openai.api_key="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"
 def main_style():
    #the styling properties for the main content area class
@@ -334,6 +333,17 @@ def tab1_content():
             ),
         ),
     )
+def tab2_content():
+    main_area = MainContentArea()
+    prompt = Prompt(chat=main_area.chat)
+    return ft.Column([
+        main_area,
+        ft.Divider(height=3, color="transparent"),
+        prompt,
+    ])
+def tab3_content():
+    return ft.Text("This is Tab 3 Content", size=18, weight="w800")
+
 # defining the main function
 def main(page:ft.Page):
     # setting the page title
