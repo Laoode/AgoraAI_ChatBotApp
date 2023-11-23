@@ -372,6 +372,28 @@ def main(page:ft.page):
         expand=1,
     )
 
+
+    navbar = ft.Container(
+        **navbar_style(),
+        content=ft.Column([
+            ft.Row([
+                ft.IconButton(icon="menu", icon_size=25, icon_color="white"),
+                ft.Text("Agora-AI", size=25, color="white", weight="bold"),
+                ft.Row([
+                    ft.IconButton(icon="notifications", icon_size=25, icon_color="white"),
+                    ft.IconButton(icon="search", icon_size=25, icon_color="white"),
+                ])
+            ], alignment="spaceBetween"),
+            t
+        ])
+    )
+
+    page.add(navbar)
+    page.update()
+
+if __name__ == "__main__":
+    ft.app(target=main)
+    
 # defining the main function
 def main(page:ft.Page):
     # setting the page title
