@@ -7,6 +7,7 @@ import threading
 import openai
 
 
+
 openai.api_key="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"
 def main_style():
    #the styling properties for the main content area class
@@ -76,25 +77,44 @@ class Prompt(ft.TextField):
         self.chat: ft.ListView =chat
     # output display is working - but let's add animation to text output...
 
-# Mashaf start
-def animate_text_output(self, name:str, prompt:str):
-    word_list: list =[]
-    msg= CreateMessage(name,"")
-    self.chat.controls.append(msg)
+    # Mashaf start
+    def animate_text_output(self, name:str, prompt:str):
+        word_list: list =[]
+        msg= CreateMessage(name,"")
+        self.chat.controls.append(msg)
+
+        for word in list(prompt):
+            word_list.append(word)
+            msg.text.value="".join(word_list)
+            self.chat.update()
+            time.sleep(0.008)
+
+    def user_output(self,prompt):
+            self.animate_text_output(name="Me", prompt=prompt)
+    # Mashaf end       
+    # defining the main function
+    def main(page:ft.Page):
+        # setting the page title
+        page.title = "Kelompok1.chatbot.ai"
         
-    for word in list(prompt):
-        word_list.append(word)
-        msg.text.value="".join(word_list)
-        self.chat.update()
-        time.sleep(0.008)
+    # Mas Dimas your code put here
     
-def user_output(self,prompt):
-        self.animate_text_output(name="Me", prompt=prompt)
-# Mashaf end       
-# defining the main function
-def main(page:ft.Page):
-    # setting the page title
-    page.title = "Kelompok1.chatbot.ai"
+    # method : run all methods when started
+    def run_prompt(self, event):
+        #set the value of the user prompt
+        text = event.control.value
+
+        # disabling input field can also be added ...
+        self.value = ""
+        self.update()
+
+        # first, we output the user prompt
+        self.user_output(prompt=text)
+
+        # second, we display GPT output
+        self.gpt_output(prompt=text)
+
+    
 
 
 
