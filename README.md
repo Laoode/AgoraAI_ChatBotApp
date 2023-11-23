@@ -1,3 +1,4 @@
+![logo](https://github.com/Laoode/tubes_pbo_paling_kweren/blob/main/Banner.png)
 
 <h1 align="center">Welcome to Agora-Ai Chatbot Repository 👋</h1>
 <h3 align="center">Developed collaboratively by Team 1</h3>
@@ -35,9 +36,21 @@
   <li>E1E122108-MUH FAUZAN MAULANA</li>
   <li>E1E122121-MUHAMMAD RAFIQ AL MA'RUF</li>
   <li>E1E122147-WIDYA DWI TSUNAMI</li>
+  <li>E1E121032-MUHAMMAD ALFAN DIMAS ABDILLAH</li>
 </ol>
 
+<h3 align="left">Installation:</h3>
+<p align="left">To set up the required tools, run the following commands:</p>
 
+```bash
+pip install flet
+pip install openai
+```
+
+<h3 align="left">Application Output:</h3>
+<p align="left">Check out the application output in the video below:</p>
+
+https://github.com/Laoode/tubes_pbo_paling_kweren/assets/119650090/7eef3d53-84e2-4d17-81e6-9117b20026c4.mp4
 
 
 
