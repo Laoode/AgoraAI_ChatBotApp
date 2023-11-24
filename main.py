@@ -120,7 +120,34 @@ class Prompt(ft.TextField):
         # second, we display GPT output
         self.gpt_output(prompt=text)
         
-# Mas Fauzan your code put here
+class SignInButton(ft.UserControl):
+    def _init_(self, btn_name):
+        self.btn_name = btn_name
+        super()._init_()
+
+    def build(self):
+        return ft.Container(
+            content=ft.ElevatedButton(
+                content=ft.Text(
+                    self.btn_name,
+                    size=13,
+                    weight='bold',
+                ),
+                style=ft.ButtonStyle(
+                    shape={
+                        "": ft.RoundedRectangleBorder(radius=8),
+                    },
+                    color={
+                        "": "black",
+                    },
+                    bgcolor={
+                        "": "#7df6dd",
+                    }
+                ),
+                height=42,
+                width=320,
+            )
+        )
 
 
 class AnimatedBox(ft.UserControl):
