@@ -6,8 +6,8 @@ import time
 import openai
 
 # Set API key for OpenAI
-openai.api_key = "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" #API IRFAN
-# openai.api_key = "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" #API RIO
+openai.api_key = "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" #API IRFAN
+# openai.api_key = "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" #API RIO
 
 # The styling properties for the main content area class/ for chat AI
 def main_style():
