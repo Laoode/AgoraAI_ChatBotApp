@@ -128,13 +128,14 @@ class Prompt(ft.TextField):
          # second, we display GPT output
         self.gpt_output.display_output(prompt=text)
 
+    
+# Class definition for a custom sign-in button in the GUI.
 
-# Class for sign in button
 class SignInButton(ft.UserControl):
-    def __init__(self, btn_name):
+    def __init__(self, btn_name): 
         self.btn_name = btn_name
         super().__init__()
-
+  
     def build(self):
         return ft.Container(
             content=ft.ElevatedButton(
