@@ -1,18 +1,20 @@
+# Import the required libraries and modules
 import flet as ft
 from flet import *
 from math import pi
 import time
-import threading
 import openai
 
-# "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"
-openai.api_key="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"
+# Set API key for OpenAI
+openai.api_key = "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" #API IRFAN
+# openai.api_key = "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" #API RIO
+
+# The styling properties for the main content area class/ for chat AI
 def main_style():
-    #the styling properties for the main content area class
     return {
         "width": 420,
         "height": 450,
-        "bgcolor": "#ebeefa", #"ebeefa"
+        "bgcolor": "#ebeefa",  
         "border_radius": 10,
         "padding": 15,
     }
@@ -36,86 +38,99 @@ def navbar_style():
         "padding": 10,
     }
 
+# Function to set the display style of the prompt
 def prompt_style():
-    return{
+    return {
         "width": 420,
         "height": 40,
-        "border_color":"white",
-        "content_padding":10,
-        "cursor_color":"white",
+        "border_color": "white",
+        "content_padding": 10,
+        "cursor_color": "white",
     }
 
 #main content area class
 class MainContentArea(ft.Container):
     def __init__(self):
         super().__init__(**main_style())
-        self.chat=ft.ListView(
+        self.chat = ft.ListView(
             expand=True,
             height=200,
             spacing=15,
             auto_scroll=True,
         )
-        self.content=self.chat
+        self.content = self.chat
 
-#before pushing text to UI - create a class that generates the UI for the actual text prompts
+#Before pushing text to UI - create a class that generates the UI for the actual text prompts
 class CreateMessage(ft.Column):
     def __init__(self, name: str, message: str):
         self.name = name #show's which prompt is whos
         self.message = message
-        self.text= ft.Text(self.message)
+        self.text = ft.Text(self.message)
         super().__init__(spacing=4)
-        self.controls=[ft.Text(self.name, opacity=0.6), self.text]
+        self.controls = [ft.Text(self.name, opacity=0.6), self.text]
 
-# user input class
-class Prompt(ft.TextField):
-    def __init__(self, chat:ft.ListView):
-        super().__init__(**prompt_style(), on_submit=self.run_prompt)
-        #need access to main chat area -from MainContentArea class
-        self.chat: ft.ListView =chat
+# OOP Polimorphism
+class MessageOutput(ft.UserControl):
+    def __init__(self, name: str, chat: ft.ListView):
+        self.name = name
+        self.chat: ft.ListView = chat
+        super().__init__()
         
     # output display is working - but let's add animation to text output...
-    
-    def animate_text_output(self, name:str, prompt:str):
-        word_list: list =[]
-        msg= CreateMessage(name,"")
+    def animate_text_output(self, prompt: str):
+        word_list = []
+        msg = CreateMessage(self.name, "")
         self.chat.controls.append(msg)
-        
+
         #list(prompt) => we deconstruct the prompt text into sepreate characters, and loop over them
         for word in list(prompt):
             word_list.append(word)
-            msg.text.value="".join(word_list)
+            msg.text.value = "".join(word_list)
             self.chat.update()
             time.sleep(0.008)
-            
-    def user_output(self,prompt):
-        self.animate_text_output(name="Me", prompt=prompt)
-    
-    def gpt_output(self, prompt):
-        # the following is the basic response to get chat GPT answer
+class UserOutput(MessageOutput):
+    def __init__(self, chat: ft.ListView):
+        super().__init__("Me", chat)
+
+    def display_output(self, prompt):
+        self.animate_text_output(prompt)
+class GptOutput(MessageOutput):
+    # the following is the basic response to get chat GPT answer
+    def __init__(self, chat: ft.ListView):
+        super().__init__("Agora", chat)
+
+    def display_output(self, prompt):
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "user", "content": prompt}]
         )
         response = response['choices'][0]['message']['content'].strip()
-        self.animate_text_output(name="Agora", prompt=response)
+        self.animate_text_output(response)
+
+# class running
+class Prompt(ft.TextField):
+    def __init__(self, chat: ft.ListView, user_output: UserOutput, gpt_output: GptOutput, **kwargs):
+        super().__init__(**prompt_style(), on_submit=self.run_prompt, **kwargs)
+        self.chat: ft.ListView = chat
+        self.user_output: UserOutput = user_output  # Tambahkan parameter user_output
+        self.gpt_output: GptOutput = gpt_output  # Tambahkan parameter gpt_output
+
 
     #method : runn all methods when started
     def run_prompt(self, event):
         # set the value of the user prompt
         text = event.control.value
-
         # disabling input field can also be added ...
         self.value = ""
         self.update()
-
         # first, we output the user prompt
-        self.user_output(prompt=text)
+        self.user_output.display_output(prompt=text)
+         # second, we display GPT output
+        self.gpt_output.display_output(prompt=text)
 
-        # second, we display GPT output
-        self.gpt_output(prompt=text)
-
-        
+    
 # Class definition for a custom sign-in button in the GUI.
+
 class SignInButton(ft.UserControl):
     def __init__(self, btn_name): 
         self.btn_name = btn_name
@@ -146,6 +161,7 @@ class SignInButton(ft.UserControl):
         )
 
 
+#Class for the animation box
 class AnimatedBox(ft.UserControl):
     def __init__(self, border_color, bg_color, rotate_angle):
         self.border_color = border_color
@@ -164,7 +180,7 @@ class AnimatedBox(ft.UserControl):
             animate_rotation=ft.animation.Animation(700, "easeInOut"),
         )
 
-
+# Classes for user input
 class UserInputField(ft.UserControl):
     def __init__(self, icon_name, text_hint, hide, function_emails: bool, function_check: bool):
         self.icon_name = icon_name
@@ -173,7 +189,8 @@ class UserInputField(ft.UserControl):
         self.function_emails = function_emails
         self.function_check = function_check
         super().__init__()
-
+    
+    # Function to add email prefix
     def return_email_prefix(self, e):
         email = self.controls[0].content.controls[1].value
         if e.control.data in email:
@@ -183,7 +200,8 @@ class UserInputField(ft.UserControl):
             self.controls[0].content.controls[2].offset = ft.transform.Offset(0.5, 0)
             self.controls[0].content.controls[2].opacity = 0
             self.update()
-
+    
+    # Function for composing email prefix labels
     def prefix_email_containers(self):
         email_labels = ["@gmail.com", "@hotmail.com"]
         label_title = ["GMAIL", "MAIL"]
@@ -213,7 +231,8 @@ class UserInputField(ft.UserControl):
             animate_offset=ft.animation.Animation(400, "decelerate"),
             controls=[__]
         )
-
+    
+    # Function to display the off-focus checkbox
     def off_focus_input_check(self):
         return ft.Container(
             opacity=0,
@@ -229,7 +248,8 @@ class UserInputField(ft.UserControl):
                 disabled=True,
             )
         )
-
+    
+    # Function to get email prefix
     def get_prefix_emails(self, e):
         if self.function_emails:
             email = self.controls[0].content.controls[1].value
@@ -248,7 +268,8 @@ class UserInputField(ft.UserControl):
                 self.update()
         else:
             pass
-
+        
+    # Function to get a green check
     def get_green_check(self, e):
         if self.function_check:
             email = self.controls[0].content.controls[1].value
@@ -304,11 +325,13 @@ class UserInputField(ft.UserControl):
             )
         )
 
+
+# Function to display tab1 content
 def tab1_content():
     return Card(
         elevation=15,
         content=ft.Container(
-            width=300,  # Tambahkan properti width di sini
+            width=300,  
             height=612,
             bgcolor="#ebeefa",
             border_radius=6,
@@ -350,19 +373,24 @@ def tab1_content():
             ),
         ),
     )
-    
+
+# Function to display tab2 content
 def tab2_content():
     main_area = MainContentArea()
-    prompt = Prompt(chat=main_area.chat)
+    user_output = UserOutput(chat=main_area.chat)
+    gpt_output = GptOutput(chat=main_area.chat)
+    prompt = Prompt(chat=main_area.chat, user_output=user_output, gpt_output=gpt_output)
     return ft.Column([
         main_area,
         ft.Divider(height=3, color="transparent"),
         prompt,
     ])
+
+# Function to display tab3 content
 def tab3_content():
     return ft.Text("This is Tab 3 Content", size=18, weight="w800")
 
-
+# The main function to run the application
 def main(page: ft.Page):
     page.horizontal_alignment="center"
     page.vertical_alignment="center"
