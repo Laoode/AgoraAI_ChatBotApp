@@ -324,8 +324,23 @@ class UserInputField(ft.UserControl):
                 ],
             )
         )
+        
+# kelas barunya
+# Kelas NewClass adalah kelas turunan dari ft.Container yang digunakan untuk membuat wadah UI kustom. Tujuan kelas ini adalah membuat tampilan atau elemen UI yang khusus dengan properti tertentu, seperti judul (title) dan konten (content). Berikut adalah penjelasan singkat tentang fungsi dari masing-masing atribut dan metode dalam kelas NewClass
+#Dengan kata lain, kelas NewClass dirancang untuk membuat dan mengelola elemen UI tertentu yang memiliki struktur dan penataan tertentu, seperti judul dan konten. Anda dapat mengubah dan menyesuaikan metode dan properti sesuai kebutuhan desain UI Anda. Dalam skrip yang Anda berikan, objek-objek NewClass digunakan di dalam fungsi tab2_content() untuk menambahkan elemen UI tambahan ke dalam tata letak tab kedua.
+class NewClass(ft.Container):
+    def __init__(self, title: str, content: str):
+        super().__init__(width=300, height=200, bgcolor="#ffffff", border_radius=10, padding=15)
+        self.title = title
+        self.content = content
+        self.title_text = ft.Text(title, size=16, weight='bold', color='#333333')
+        self.content_text = ft.Text(content, size=12, color='#666666')
 
-
+        self.add_controls([
+            self.title_text,
+            self.content_text
+        ])
+        
 # Function to display tab1 content
 def tab1_content():
     return Card(
@@ -350,7 +365,7 @@ def tab1_content():
                         alignment=MainAxisAlignment.CENTER,
                         spacing=5,
                         controls=[
-                            Text("Sign In Below", size=22, weight='bold'),
+                            Text("selamat ujian", size=22, weight='bold'),
                             Text("          Agora-AI", size=13, weight='bold'),
                         ],
                     ),
@@ -380,10 +395,17 @@ def tab2_content():
     user_output = UserOutput(chat=main_area.chat)
     gpt_output = GptOutput(chat=main_area.chat)
     prompt = Prompt(chat=main_area.chat, user_output=user_output, gpt_output=gpt_output)
+    
+    # Instancekan objek kelas baru
+    object1 = NewClass(title="Object 1", content="This is the content of object 1")
+    object2 = NewClass(title="Object 2", content="This is the content of object 2")
+    
     return ft.Column([
         main_area,
         ft.Divider(height=3, color="transparent"),
         prompt,
+        object1, # ditambahkan
+        object2
     ])
 
 # Function to display tab3 content
