@@ -6,7 +6,7 @@ import time
 import openai
 
 # Set API key for OpenAI
-openai.api_key = "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" #API IRFAN
+openai.api_key = "sk-mZzbb0F9egc2CiUwUi9eT3BlbkFJJ8aADVkVplvaH8TKvB1w1123" #API IRFAN
 # openai.api_key = "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" #API RIO
 
 # The styling properties for the main content area class/ for chat AI
@@ -22,7 +22,7 @@ def main_style():
 def navbar_style():
     # styling for the navigation bar
     return {
-        "border_radius": ft.border_radius.vertical(bottom=30),
+        "border_radius": ft.border_radius.vertical(bottom=30),  
         "shadow": ft.BoxShadow(
             spread_radius=1,
             blur_radius=10,
