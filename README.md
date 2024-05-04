@@ -28,6 +28,13 @@ pip install openai
 
 https://github.com/Laoode/tubes_pbo_paling_kweren/assets/119650090/7eef3d53-84e2-4d17-81e6-9117b20026c4.mp4
 
+<h2 align="left">✨ Contributions</h2>
+
+<a href = "https://github.com/Laoode/AgoraAI_ChatBotApp/graphs/contributors">
+  <img src = "https://contrib.rocks/image?repo = GitHub_username/repository_name"/>
+</a>
+
+
 
 
 
