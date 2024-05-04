@@ -30,8 +30,8 @@ https://github.com/Laoode/tubes_pbo_paling_kweren/assets/119650090/7eef3d53-84e2
 
 <h2 align="left">✨ Contributions</h2>
 
-<a href = "https://github.com/Laoode/AgoraAI_ChatBotApp/graphs/contributors">
-  <img src = "https://contrib.rocks/image?repo = Laoode/AgoraAI_ChatBotApp"/>
+<a href="https://github.com/laoode/AgoraAI_ChatBotApp/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=laoode/AgoraAI_ChatBotApp" />
 </a>
 
 
