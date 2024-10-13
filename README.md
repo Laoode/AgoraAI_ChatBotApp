@@ -39,7 +39,7 @@ https://github.com/Laoode/tubes_pbo_paling_kweren/assets/119650090/7eef3d53-84e2
 
 
 
-
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/H2H714OX25)
 
 
 
