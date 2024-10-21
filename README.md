@@ -1,6 +1,9 @@
-![logo](https://github.com/Laoode/tubes_pbo_paling_kweren/blob/main/Banner.png)
-
 <h1 align="center">Welcome to Agora-Ai Chatbot Repository 👋</h1>
+
+<div align="center">
+  <img src="https://github.com/Laoode/tubes_pbo_paling_kweren/blob/main/chatbot.gif" alt="banner">
+</div>
+
 <h3 align="center">Developed collaboratively by Team 1</h3>
 
 <p align="left">Engaged in a significant project as part of the Object-Oriented Programming course</p>
