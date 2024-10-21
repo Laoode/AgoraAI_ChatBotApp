@@ -9,9 +9,9 @@
 <p align="left">Engaged in a significant project as part of the Object-Oriented Programming course</p>
 
 <h3 align="left">Languages and Tools:</h3>
-<p align="left"> 
-  <a href="https://flutter.dev" target="_blank" rel="noreferrer"> 
-    <img src="https://www.vectorlogo.zone/logos/flutterio/flutterio-icon.svg" alt="flutter" width="40" height="40"/> 
+<p align="left" style="display: flex; gap: 10px;"> 
+  <a href="https://flet.dev/" target="_blank" rel="noreferrer"> 
+    <img src="https://flet.dev/img/logo.svg" alt="flet" width="40" height="40"/> 
   </a> 
   <a href="https://www.python.org" target="_blank" rel="noreferrer"> 
     <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> 
